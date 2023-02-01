@@ -14,6 +14,7 @@ class Base():
     """ Method assert word"""
     def assert_word(self, word, result):
         value_word=word.text
+        print(value_word)
         assert value_word == result
         print("good value word")
 
@@ -23,11 +24,14 @@ class Base():
         #now_date=1
         name_screenshot = 'Screenshot'+now_date+'.png'
         print(name_screenshot)
-        self.driver.save_screenshot('D:/EDUC/stepikQAAuto/Tasks/main_project/screen/' + name_screenshot)
+        self.driver.save_screenshot('D:\\EDUC\\stepikQAAuto\\Tasks\\Project01_02\\screen' + name_screenshot)
         print("screenshot saved")
 
     """ Method assert url"""
-    def assert_url(self,result):
+    def assert_url(self, result):
         get_url = self.driver.current_url
         assert get_url == result
         print("good url")
+
+    def refresh_page(self):
+        self.driver.refresh()

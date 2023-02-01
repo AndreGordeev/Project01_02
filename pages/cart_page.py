@@ -13,13 +13,15 @@ class Cart_page(Base):
         self.driver = driver
 
     #Locators
-    checkout_button = '//button[@id="checkout"]'
+    checkout_button = '/html/body/div/main/section/div/div[2]/article/div/a[1]'
+    enter_adress_button = '/html/body/div/main/section/div/div[1]/form/div[1]/div[2]/button'
 
 
     #Getters
     def get_checkout_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.checkout_button)))
-
+    def get_enter_adress_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.enter_adress_button)))
 
 
 
@@ -27,6 +29,9 @@ class Cart_page(Base):
     def click_checkout_button(self):
         self.get_checkout_button().click()
         print("checkout button clicked")
+    def click_enter_adress_button(self):
+        self.get_enter_adress_button().click()
+        print("enter adress button clicked")
 
 
 
@@ -34,9 +39,11 @@ class Cart_page(Base):
     def order_product(self):
 
         Logger.add_start_step(method='order_product')
-
+        self.refresh_page()
         self.get_current_url()
         self.click_checkout_button()
+        self.assert_url("https://qatest-dev.indvp.com/checkout")
+        self.click_enter_adress_button()
         Logger.add_end_step(url=self.driver.current_url, method='order_product')
 
 
